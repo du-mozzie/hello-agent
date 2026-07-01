@@ -1,6 +1,6 @@
 # HelloAgents
 
-这是一个按 Datawhale「Hello-Agents」教程主线实现的模块化智能体项目。项目不是只放章节脚本，而是把教程里的核心概念整理成一个可安装、可测试、可复用的 Python 包。
+这是一个按 Datawhale[「Hello-Agents」](https://datawhalechina.github.io/hello-agents/#/)教程主线实现的模块化智能体项目。项目不是只放章节脚本，而是把教程里的核心概念整理成一个可安装、可测试、可复用的 Python 包。
 
 默认实现只依赖 Python 标准库，可以离线运行；如果需要接入真实大模型，可以使用 OpenAI-compatible API 客户端。
 
@@ -23,28 +23,28 @@ helloagents town
 python examples/chapter16_capstone.py
 ```
 
-## 中文文档
+## 文档
 
-- 中文文档入口：[docs/README.md](docs/README.md)
-- 中文模块文档：[docs/modules](docs/modules)
-- 中文章节指南：[docs/chapters](docs/chapters)
+- 文档入口：[docs/README.md](docs/README.md)
+- 模块文档：[docs/modules](docs/modules)
+- 章节指南：[docs/chapters](docs/chapters)
 
 ## 模块总览
 
-| 模块 | 说明 | 中文文档 |
+| 模块 | 说明 | 文档 |
 | --- | --- | --- |
-| `helloagents.schema` | 消息、步骤、工具调用、Agent 结果等共享数据结构 | [核心模型](docs/zh/modules/core.md) |
-| `helloagents.fundamentals` | ELIZA、N-gram、BPE、简单 embedding、attention 演示 | [基础算法](docs/zh/modules/fundamentals.md) |
-| `helloagents.llms` | 离线规则模型和 OpenAI-compatible LLM 客户端 | [模型接口](docs/zh/modules/llms.md) |
-| `helloagents.tools` | 工具抽象、工具注册表、计算器、搜索、终端工具 | [工具系统](docs/zh/modules/tools.md) |
-| `helloagents.agents` | Simple、ReAct、Plan-and-Solve、Reflection Agent | [智能体范式](docs/zh/modules/agents.md) |
-| `helloagents.memory` | 工作记忆、会话记忆、向量检索、RAG | [记忆与检索](docs/zh/modules/memory.md) |
-| `helloagents.context` | 笔记、工作区快照、优先级上下文构建 | [上下文工程](docs/zh/modules/context.md) |
-| `helloagents.protocols` | MCP-like 工具、A2A 通信、ANP 注册、任务分发 | [通信协议](docs/zh/modules/protocols.md) |
-| `helloagents.evaluation` | 任务评测、函数调用评测、成对评审 | [性能评估](docs/zh/modules/evaluation.md) |
-| `helloagents.training` | SFT/偏好数据、奖励函数、LoRA/GRPO 配置计划 | [训练与 Agentic RL](docs/zh/modules/training.md) |
-| `helloagents.lowcode` | Dify、Coze、FastGPT、n8n 风格流程描述与导出 | [低代码平台](docs/zh/modules/lowcode.md) |
-| `helloagents.applications` | 旅行助手、深度研究、赛博小镇等综合应用 | [综合应用](docs/zh/modules/applications.md) |
+| `helloagents.schema` | 消息、步骤、工具调用、Agent 结果等共享数据结构 | [核心模型](docs/modules/core.md) |
+| `helloagents.fundamentals` | ELIZA、N-gram、BPE、简单 embedding、attention 演示 | [基础算法](docs/modules/fundamentals.md) |
+| `helloagents.llms` | 离线规则模型和 OpenAI-compatible LLM 客户端 | [模型接口](docs/modules/llms.md) |
+| `helloagents.tools` | 工具抽象、工具注册表、计算器、搜索、终端工具 | [工具系统](docs/modules/tools.md) |
+| `helloagents.agents` | Simple、ReAct、Plan-and-Solve、Reflection Agent | [智能体范式](docs/modules/agents.md) |
+| `helloagents.memory` | 工作记忆、会话记忆、向量检索、RAG | [记忆与检索](docs/modules/memory.md) |
+| `helloagents.context` | 笔记、工作区快照、优先级上下文构建 | [上下文工程](docs/modules/context.md) |
+| `helloagents.protocols` | MCP-like 工具、A2A 通信、ANP 注册、任务分发 | [通信协议](docs/modules/protocols.md) |
+| `helloagents.evaluation` | 任务评测、函数调用评测、成对评审 | [性能评估](docs/modules/evaluation.md) |
+| `helloagents.training` | SFT/偏好数据、奖励函数、LoRA/GRPO 配置计划 | [训练与 Agentic RL](docs/modules/training.md) |
+| `helloagents.lowcode` | Dify、Coze、FastGPT、n8n 风格流程描述与导出 | [低代码平台](docs/modules/lowcode.md) |
+| `helloagents.applications` | 旅行助手、深度研究、赛博小镇等综合应用 | [综合应用](docs/modules/applications.md) |
 
 ## 章节覆盖
 
@@ -96,8 +96,6 @@ print(agent.run("解释 ReAct 智能体").answer)
 helloagents/          # Python 包源码
 examples/             # 章节示例与基础示例
 tests/                # 单元测试
-docs/modules/         # 英文模块文档
-docs/chapters/        # 英文章节指南
-docs/zh/modules/      # 中文模块文档
-docs/zh/chapters/     # 中文章节指南
+docs/modules/      # 模块文档
+docs/chapters/     # 章节指南
 ```
