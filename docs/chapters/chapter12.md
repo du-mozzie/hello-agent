@@ -1,10 +1,10 @@
-# Chapter 12 - Agent Performance Evaluation
+# 第 12 章：智能体性能评估
 
-## Goal
+## 学习目标
 
-Measure agent outputs using task cases, function-call checks, and pairwise judging.
+理解如何用任务样例、函数调用检查和成对评审来度量智能体效果。
 
-## Implemented Code
+## 对应实现
 
 - `TaskCase`
 - `Evaluator`
@@ -13,12 +13,16 @@ Measure agent outputs using task cases, function-call checks, and pairwise judgi
 - `FunctionCallEvaluator`
 - `PairwiseJudge`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter12_evaluation.py
 ```
 
-## Extension
+## 代码要点
 
-Add BFCL/GAIA dataset loaders, sandboxed tool execution, latency/cost metrics, and human verification workflows.
+评估不应只看最终文本，还应检查工具调用、结构化输出、步骤轨迹和稳定性。
+
+## 扩展方向
+
+接入 BFCL、GAIA、业务数据集、人类审核和成本/延迟统计。

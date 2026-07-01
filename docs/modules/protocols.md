@@ -1,33 +1,37 @@
-# Protocols Module
+# 通信协议
 
-Module: `helloagents.protocols`
+模块：`helloagents.protocols`
 
-This module models the communication layer introduced in the tutorial.
+该模块把教程中的 MCP、A2A、ANP、任务分发、负载均衡和协商思想抽象成可运行的本地实现。
 
-## Protocols
+## 组件
 
-- `MCPToolAdapter`: exposes a local `Tool` through a minimal MCP-like call schema.
-- `A2AAgent`: sends direct messages between peer agents.
-- `ANPRegistry`: publishes and discovers named services.
-- `TaskDistributor`: assigns tasks to agents by capability keyword.
-- `RoundRobinLoadBalancer`: balances requests across equivalent workers.
-- `SimpleNegotiator` and `NegotiationOffer`: choose offers by weighted utility.
+- `MCPToolAdapter`：把本地 `Tool` 暴露成 MCP-like 调用结构。
+- `A2AAgent`：智能体之间直接发送消息。
+- `ANPRegistry`：发布和发现命名服务。
+- `TaskDistributor`：根据能力关键词分配任务。
+- `RoundRobinLoadBalancer`：在多个等价 worker 之间轮询。
+- `NegotiationOffer`：协商报价。
+- `SimpleNegotiator`：按权重计算效用并选择最优报价。
 
-## Example
+## 示例
 
 ```python
-from helloagents import A2AAgent, SimpleAgent
+from helloagents import TaskDistributor
 
-alice = A2AAgent(SimpleAgent("alice"))
-bob = A2AAgent(SimpleAgent("bob"))
-reply = alice.send(bob, "Summarize your role.")
-print(reply.content)
+distributor = TaskDistributor()
+distributor.register("coding-agent", ["code", "debug", "test"])
+print(distributor.assign("debug test failure"))
 ```
 
-## Production Mapping
+## 分层理解
 
-Use `MCPToolAdapter` as the local contract before replacing it with a real MCP server/client. Use `A2AAgent` and `ANPRegistry` to prototype multi-agent collaboration and service discovery.
+本地原型可以直接调用 Python 对象。生产系统通常还需要：
 
-## Communication Layers
+- HTTP、WebSocket 或消息队列传输。
+- 鉴权和权限控制。
+- Schema 校验。
+- 重试和幂等。
+- 调用日志和审计。
 
-Local prototypes can call Python objects directly. Production systems normally add transport, authentication, schema validation, retries, idempotency, and durable queues. The module keeps those concerns explicit so they can be introduced without rewriting agent logic.
+本模块保留这些边界，方便以后替换成真实协议服务。

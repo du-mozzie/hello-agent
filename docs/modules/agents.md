@@ -1,30 +1,39 @@
-# Agents Module
+# 智能体范式
 
-Module: `helloagents.agents`
+模块：`helloagents.agents`
 
-The agents module implements the tutorial's main agent paradigms.
+该模块实现教程中的经典智能体控制循环，从简单 LLM 调用到 ReAct、Plan-and-Solve 和 Reflection。
 
-## Agents
+## 组件
 
-- `SimpleAgent`: sends one prompt to an LLM.
-- `ReActAgent`: alternates `Thought`, `Action`, and `Observation` steps.
-- `PlanAndSolveAgent`: creates a plan before generating the final answer.
-- `ReflectionAgent`: drafts, critiques, and revises.
+- `BaseAgent`：所有智能体的基础类，保存名称、系统提示词、LLM 和消息历史。
+- `SimpleAgent`：单轮模型调用，适合理解最小智能体结构。
+- `ReActAgent`：交替执行 `Thought`、`Action`、`Observation`。
+- `PlanAndSolveAgent`：先规划，再基于计划回答。
+- `ReflectionAgent`：先生成草稿，再反思并修订。
 
-## ReAct Example
+## ReAct 示例
 
 ```python
 from helloagents import ReActAgent
 
-agent = ReActAgent()
+agent = ReActAgent(max_steps=3)
 result = agent.run("What is (25 + 15) * 3 - 8?")
 print(result.answer)
+
+for step in result.steps:
+    print(step.type, step.content)
 ```
 
-## Extension Points
+## 执行轨迹
 
-Pass a custom `BaseLLM` implementation or a custom `ToolRegistry` to connect external models, APIs, databases, or MCP servers.
+所有 Agent 都返回 `AgentResult`。其中 `steps` 记录中间过程，可用于：
 
-## Agent Loop Details
+- 调试智能体行为。
+- 展示 UI 执行轨迹。
+- 生成训练数据。
+- 做评估和回归测试。
 
-`ReActAgent` emits `StepEvent` records for thoughts, actions, and observations. These records are suitable for debugging, UI traces, evaluation, and training data generation. `PlanAndSolveAgent` and `ReflectionAgent` use the same result schema, so downstream code can compare different paradigms without special casing each one.
+## 扩展建议
+
+生产场景建议增加结构化输出解析、工具调用重试、异常恢复、最大成本限制和执行日志持久化。

@@ -1,16 +1,16 @@
-# LLMs Module
+# 模型接口
 
-Module: `helloagents.llms`
+模块：`helloagents.llms`
 
-This module provides a small model interface used by every agent.
+该模块提供智能体调用模型的统一接口。项目默认使用离线的 `RuleBasedLLM`，因此测试和示例不依赖网络。
 
-## Classes
+## 组件
 
-- `BaseLLM`: abstract interface with `complete(messages)` and convenience `invoke(prompt)`.
-- `RuleBasedLLM`: deterministic offline implementation for tests and examples.
-- `OpenAICompatibleLLM`: optional client for OpenAI-compatible APIs.
+- `BaseLLM`：抽象基类，定义 `complete(messages)` 和便捷方法 `invoke(prompt)`。
+- `RuleBasedLLM`：确定性的离线规则模型，用于测试、演示和示例。
+- `OpenAICompatibleLLM`：OpenAI-compatible Chat Completions 客户端。
 
-## Offline Example
+## 离线示例
 
 ```python
 from helloagents import RuleBasedLLM
@@ -19,19 +19,22 @@ llm = RuleBasedLLM()
 print(llm.invoke("What is 1 + 2?"))
 ```
 
-## OpenAI-Compatible Example
+## 接入真实模型
+
+```powershell
+pip install -e .[openai]
+$env:OPENAI_API_KEY="..."
+$env:OPENAI_BASE_URL="https://api.openai.com/v1"
+$env:OPENAI_MODEL="gpt-4o-mini"
+```
 
 ```python
 from helloagents import OpenAICompatibleLLM
 
-llm = OpenAICompatibleLLM(model="gpt-4o-mini")
-print(llm.invoke("Explain ReAct in one paragraph."))
+llm = OpenAICompatibleLLM()
+print(llm.invoke("用一段话解释 ReAct 智能体。"))
 ```
 
-Install optional dependencies first:
+## 扩展建议
 
-```powershell
-pip install -e .[openai]
-```
-
-Required environment variable: `OPENAI_API_KEY`.
+如果要接入其他供应商，只需要继承 `BaseLLM` 并实现 `complete()`。Agent 层不需要知道底层供应商是 OpenAI、ModelScope、本地模型还是企业内部网关。

@@ -1,10 +1,10 @@
-# Chapter 11 - Agentic RL
+# 第 11 章：Agentic RL
 
-## Goal
+## 学习目标
 
-Prepare data and rewards for agent training workflows without requiring a GPU training stack.
+理解 Agent 训练前的数据准备、偏好样本、奖励函数、LoRA 配置和 GRPO 流程计划。
 
-## Implemented Code
+## 对应实现
 
 - `TrainingExample`
 - `PreferenceExample`
@@ -14,12 +14,16 @@ Prepare data and rewards for agent training workflows without requiring a GPU tr
 - `GRPOConfig`
 - `TrainingPipelinePlan`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter11_agentic_rl.py
 ```
 
-## Extension
+## 代码要点
 
-Feed exported JSONL into external SFT, LoRA, DPO, or GRPO frameworks. Keep rewards deterministic before adding LLM judges.
+本项目不直接训练模型，而是提供训练数据和配置计划。这样可以与外部 SFT、LoRA、DPO、GRPO 框架对接。
+
+## 扩展方向
+
+接入真实训练框架，加入模型 checkpoint、数据版本管理和训练后评估。

@@ -1,21 +1,25 @@
-# Chapter 13 - Intelligent Travel Assistant
+# 第 13 章：智能旅行助手
 
-## Goal
+## 学习目标
 
-Build a task-oriented assistant that converts user preferences into a multi-day itinerary.
+把 Agent 能力组合成面向用户任务的旅行规划应用。
 
-## Implemented Code
+## 对应实现
 
 - `TravelPlanner`
 - `TripPlan`
 - `TripDay`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter13_trip_planner.py
 ```
 
-## Extension
+## 代码要点
 
-Integrate maps, POI search, weather, restaurant data, budget constraints, and route optimization.
+`TravelPlanner.build_plan()` 返回结构化计划，`to_markdown()` 负责文本展示。结构化输出更适合 UI、API 和评估。
+
+## 扩展方向
+
+接入地图、POI、天气、预算、交通路线和酒店信息。

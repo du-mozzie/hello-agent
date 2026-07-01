@@ -1,36 +1,35 @@
-# Training Module
+# 训练与 Agentic RL
 
-Module: `helloagents.training`
+模块：`helloagents.training`
 
-The training module provides data and reward utilities for Agentic RL workflows.
+该模块不直接训练大模型，而是提供训练数据、偏好数据、奖励函数和训练计划配置，便于接入外部 SFT、LoRA、DPO 或 GRPO 框架。
 
-## Components
+## 组件
 
-- `TrainingExample`: prompt and response pair for SFT-style data.
-- `PreferenceExample`: prompt with chosen/rejected responses for preference training.
-- `DatasetBuilder`: collects SFT and preference examples and exports JSONL.
-- `RewardFunction`: composable scoring utility.
-- `LoRAConfig`: lightweight fine-tuning configuration.
-- `GRPOConfig`: agentic RL configuration placeholder.
-- `TrainingPipelinePlan`: command plan for validation, SFT, GRPO, and evaluation.
-- `save_jsonl` and `load_jsonl`: portable dataset helpers.
+- `TrainingExample`：SFT 样例，包含 prompt 和 response。
+- `PreferenceExample`：偏好样例，包含 chosen 和 rejected。
+- `DatasetBuilder`：收集并导出 SFT/偏好数据。
+- `RewardFunction`：可组合的文本奖励函数。
+- `LoRAConfig`：LoRA 参数配置。
+- `GRPOConfig`：GRPO 参数配置。
+- `TrainingPipelinePlan`：训练流水线命令计划。
+- `save_jsonl` / `load_jsonl`：JSONL 数据读写。
 
-## Example
+## 示例
 
 ```python
-from helloagents import RewardFunction
+from helloagents import DatasetBuilder, RewardFunction
+
+builder = DatasetBuilder()
+builder.add_sft("Solve with ReAct: 2+2", "Thought: calculate\nAction: calculator[2+2]")
 
 reward = RewardFunction.format_reward([r"Thought:", r"Action:"])
-print(reward("Thought: inspect\nAction: search[agent]", ""))
+print(reward("Thought: calculate\nAction: calculator[2+2]"))
 ```
 
-## Scope
+## 数据质量建议
 
-This module does not run GPU training. It prepares data and rewards that can be handed to external SFT, LoRA, GRPO, or distributed training stacks.
-
-## Data Quality Checklist
-
-- Prompts should include task, constraints, and available tools.
-- Responses should include the expected reasoning/action format when training a ReAct-style agent.
-- Preference examples should differ on correctness, grounding, format, or safety.
-- Rewards should be deterministic before adding LLM-as-judge scoring.
+- Prompt 应包含任务、约束和可用工具。
+- Response 应体现目标格式，例如 ReAct 的 Thought/Action。
+- 偏好数据应在正确性、格式、引用、工具使用或安全性上形成明显差异。
+- 奖励函数先保持确定性，再考虑引入 LLM-as-judge。

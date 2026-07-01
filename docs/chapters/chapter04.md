@@ -1,10 +1,10 @@
-# Chapter 04 - Classic Agent Paradigms
+# 第 4 章：智能体经典范式构建
 
-## Goal
+## 学习目标
 
-Implement the major agent control loops: simple call, ReAct, plan-and-solve, and reflection.
+掌握常见 Agent 控制流：单次调用、ReAct、Plan-and-Solve 和 Reflection。
 
-## Implemented Code
+## 对应实现
 
 - `SimpleAgent`
 - `ReActAgent`
@@ -12,12 +12,16 @@ Implement the major agent control loops: simple call, ReAct, plan-and-solve, and
 - `ReflectionAgent`
 - `ToolRegistry`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter04_classic_paradigms.py
 ```
 
-## Extension
+## 代码要点
 
-Use domain tools and stricter output parsers for production ReAct workflows. Add metrics for step count, tool success rate, and final correctness.
+`ReActAgent` 会产生 Thought、Action、Observation 步骤；`PlanAndSolveAgent` 先规划再回答；`ReflectionAgent` 先草稿、再反思、再修订。
+
+## 扩展方向
+
+为每类 Agent 增加结构化输出、失败重试、成本控制和更严格的评估指标。

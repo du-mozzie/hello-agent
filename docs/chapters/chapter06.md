@@ -1,21 +1,26 @@
-# Chapter 06 - Framework Development Practice
+# 第 6 章：框架开发实践
 
-## Goal
+## 学习目标
 
-Show how multi-agent framework ideas map to local abstractions before using LangGraph, AutoGen, CAMEL, or AgentScope.
+理解多智能体框架的基本协作方式，并把外部框架思想映射到本地统一接口。
 
-## Implemented Code
+## 对应实现
 
 - `A2AAgent`
 - `SimpleAgent`
-- shared `Message` and `AgentResult`
+- `Message`
+- `AgentResult`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter06_framework_practice.py
 ```
 
-## Extension
+## 代码要点
 
-Wrap external frameworks behind the same agent result interface so the rest of the project can evaluate and orchestrate them consistently.
+`A2AAgent` 展示了两个 Agent 之间如何发送消息和接收回复。它是理解 AutoGen、LangGraph、CAMEL 等框架的最小抽象。
+
+## 扩展方向
+
+可以把外部框架包装成相同的 `AgentResult` 输出，统一接入评估和日志系统。

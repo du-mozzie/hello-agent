@@ -1,28 +1,39 @@
-# Applications Module
+# 综合应用
 
-Module: `helloagents.applications`
+模块：`helloagents.applications`
 
-This module contains compact implementations of the tutorial's larger projects.
+该模块实现教程后半部分的综合项目，以较小代码量展示如何组合 Agent、工具、记忆、检索、评估和应用结构。
 
-## Applications
+## 应用
 
-- `TravelPlanner`: creates a multi-day itinerary from destination and interests.
-- `TripPlan` and `TripDay`: structured travel output.
-- `DeepResearchAgent`: plans, retrieves local evidence, and synthesizes a research brief.
-- `ResearchReport`: structured research output.
-- `CyberTown`: simulates multiple town residents with episodic memory.
-- `demo_react_agent()`: preconfigured ReAct agent with calculator and local search.
+- `TravelPlanner`：根据目的地和兴趣生成多日旅行计划。
+- `TripPlan` / `TripDay`：结构化旅行计划输出。
+- `DeepResearchAgent`：规划、检索本地证据并生成研究报告。
+- `ResearchReport`：结构化研究报告。
+- `CyberTown`：多角色小镇模拟，包含事件记忆和关系变化。
+- `demo_react_agent()`：预配置 ReAct Agent，内置计算器和本地搜索。
 
-## Example
+## 示例
 
 ```python
 from helloagents import TravelPlanner
 
-print(TravelPlanner().plan("Shanghai", "museums, coffee, river walk", days=2))
+planner = TravelPlanner()
+plan = planner.build_plan("Shanghai", "museums, coffee", days=2)
+print(plan.to_markdown())
 ```
 
-These demos are intentionally small so they can run offline. Replace their services with real maps, web search, databases, or game engines as needed.
+## 结构化输出
 
-## Application Architecture
+应用层通常同时提供：
 
-Each application keeps a structured method, such as `build_plan()` or `build_report()`, and a Markdown rendering method. This separation is deliberate: UI, API, and evaluation code should consume structured data instead of scraping text.
+- `build_*()`：返回结构化对象，适合 API、UI 和评估。
+- `to_markdown()` 或 `plan()`：返回可读文本，适合命令行和文档展示。
+
+这种分离可以避免下游系统解析自然语言文本。
+
+## 扩展建议
+
+- 旅行助手可接入地图、POI、天气和路线规划。
+- 深度研究可接入 Web 搜索、引用抽取和报告导出。
+- 赛博小镇可接入前端或游戏引擎，增加地点、日程、关系网络和长期记忆。

@@ -1,22 +1,26 @@
-# Chapter 16 - Capstone Project
+# 第 16 章：毕业设计
 
-## Goal
+## 学习目标
 
-Compose the full stack: agent loop, tools, memory, context, evaluation, and an application scenario.
+把工具、Agent、记忆、上下文、评估和应用组合成一个完整项目。
 
-## Implemented Code
+## 对应实现
 
 - `ReActAgent`
 - `Evaluator`
 - `TravelPlanner`
 - `DeepResearchAgent`
 
-## Run
+## 运行示例
 
 ```powershell
 python examples/chapter16_capstone.py
 ```
 
-## Extension
+## 代码要点
 
-Turn the capstone into a product by adding a UI, persistent storage, observability, authentication, deployment scripts, and regression evaluation.
+毕业设计不应只是一个 Demo，而应包含可运行代码、模块边界、文档、测试和评估。
+
+## 扩展方向
+
+继续加入前端界面、持久化存储、用户系统、部署脚本、监控日志和回归评测集。

@@ -25,10 +25,9 @@ python examples/chapter16_capstone.py
 
 ## 中文文档
 
-- 中文文档入口：[docs/zh/README.md](docs/zh/README.md)
-- 中文模块文档：[docs/zh/modules](docs/zh/modules)
-- 中文章节指南：[docs/zh/chapters](docs/zh/chapters)
-- 英文文档仍保留在：[docs/README.md](docs/README.md)
+- 中文文档入口：[docs/README.md](docs/README.md)
+- 中文模块文档：[docs/modules](docs/modules)
+- 中文章节指南：[docs/chapters](docs/chapters)
 
 ## 模块总览
 
