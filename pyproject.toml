@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helloagents"
+version = "0.1.0"
+description = "A modular Hello-Agents implementation for learning and building AI native agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "HelloAgents Contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+dev = ["pytest>=8.0.0"]
+
+[project.scripts]
+helloagents = "helloagents.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["helloagents*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
