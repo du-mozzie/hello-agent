@@ -73,11 +73,11 @@ class OpenAICompatibleLLM(BaseLLM):
             from openai import OpenAI
         except ImportError as exc:
             raise RuntimeError("Install the openai extra: pip install -e .[openai]") from exc
-        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        self.model = 'qwen3.6-plus'
         self.temperature = temperature
         self._client = OpenAI(
-            api_key=api_key or os.getenv("OPENAI_API_KEY"),
-            base_url=base_url or os.getenv("OPENAI_BASE_URL"),
+            api_key= 'sk-837syyvh2wvjrypzfaph',
+            base_url= 'https://ai-gw.huice.com/hjy-fi/compatible-mode/v1',
             timeout=timeout,
         )
 
