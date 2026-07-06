@@ -20,7 +20,18 @@ from .fundamentals import (
     TransformerBlockTrace,
     scaled_dot_product_attention,
 )
-from .llms import BaseLLM, OpenAICompatibleLLM, RuleBasedLLM
+from .llms import (
+    ALI_API_KEY,
+    ALI_BASE_URL,
+    ALI_CHAT_BASE_URL,
+    ALI_CHAT_MODEL,
+    ALI_EMBEDDING_MODEL,
+    ALI_GATEWAY_ROOT,
+    ALI_MULTIMODAL_URL,
+    BaseLLM,
+    OpenAICompatibleLLM,
+    RuleBasedLLM,
+)
 from .lowcode import LowCodeFlow, PlatformAdapter
 from .memory import (
     ConversationMemory,
@@ -56,6 +67,13 @@ from .training import (
 __all__ = [
     "A2AAgent",
     "ANPRegistry",
+    "ALI_API_KEY",
+    "ALI_BASE_URL",
+    "ALI_CHAT_BASE_URL",
+    "ALI_CHAT_MODEL",
+    "ALI_EMBEDDING_MODEL",
+    "ALI_GATEWAY_ROOT",
+    "ALI_MULTIMODAL_URL",
     "AgentResult",
     "BaseAgent",
     "BaseLLM",

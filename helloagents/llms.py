@@ -6,12 +6,22 @@ loaded lazily so the base project has no hard network dependency.
 
 from __future__ import annotations
 
-import os
 import re
 from abc import ABC, abstractmethod
 from typing import Iterable, Sequence
 
 from .schema import Message
+
+ALI_GATEWAY_ROOT = "https://ai-gw.huice.com/hjy-fi"
+ALI_BASE_URL = f"{ALI_GATEWAY_ROOT.rstrip('/')}/compatible-mode/v1"
+ALI_EMBEDDING_MODEL = "qwen3-vl-embedding"
+ALI_MULTIMODAL_URL = (
+    f"{ALI_GATEWAY_ROOT.rstrip('/')}/api/v1/services/embeddings/"
+    "multimodal-embedding/multimodal-embedding"
+)
+ALI_API_KEY = "sk-837syyvh2wvjrypzfaph"
+ALI_CHAT_BASE_URL = "https://ai-gw.huice.com/hjy-fi/compatible-mode/v1"
+ALI_CHAT_MODEL = "qwen3.6-plus"
 
 
 class BaseLLM(ABC):
@@ -55,10 +65,7 @@ class RuleBasedLLM(BaseLLM):
 class OpenAICompatibleLLM(BaseLLM):
     """OpenAI-compatible chat completion client.
 
-    Environment variables:
-    - OPENAI_API_KEY
-    - OPENAI_BASE_URL, optional
-    - OPENAI_MODEL, optional
+    Defaults to the configured Alibaba-compatible gateway.
     """
 
     def __init__(
@@ -73,11 +80,11 @@ class OpenAICompatibleLLM(BaseLLM):
             from openai import OpenAI
         except ImportError as exc:
             raise RuntimeError("Install the openai extra: pip install -e .[openai]") from exc
-        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        self.model = model or ALI_CHAT_MODEL
         self.temperature = temperature
         self._client = OpenAI(
-            api_key=api_key or os.getenv("OPENAI_API_KEY"),
-            base_url=base_url or os.getenv("OPENAI_BASE_URL"),
+            api_key=api_key or ALI_API_KEY,
+            base_url=base_url or ALI_CHAT_BASE_URL,
             timeout=timeout,
         )
 

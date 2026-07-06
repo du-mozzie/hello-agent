@@ -23,9 +23,6 @@ print(llm.invoke("What is 1 + 2?"))
 
 ```powershell
 pip install -e .[openai]
-$env:OPENAI_API_KEY="..."
-$env:OPENAI_BASE_URL="https://api.openai.com/v1"
-$env:OPENAI_MODEL="gpt-4o-mini"
 ```
 
 ```python
